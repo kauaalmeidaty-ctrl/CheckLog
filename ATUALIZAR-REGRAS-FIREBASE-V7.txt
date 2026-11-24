@@ -1,0 +1,13 @@
+IMPORTANTE — Máquina de Ponto V7
+
+A V7 simplifica o registro e também altera database.rules.json.
+Se você testar apenas os arquivos HTML/JS com as regras antigas ainda publicadas no Firebase,
+a gravação poderá continuar falhando.
+
+Na pasta do projeto, publique as regras com:
+
+npx firebase-tools deploy --only database --project checklog-abb92
+
+Ou, no Console do Firebase:
+Realtime Database > Regras
+cole o conteúdo de database.rules.json e clique em Publicar.

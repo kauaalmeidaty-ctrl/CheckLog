@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Tela Dashboard de Estoque do sistema CheckLog.">
+    <base href="../">
+    <title>Dashboard de Estoque | CheckLog</title>
+    <link rel="icon" href="img/checklog-logo-removebg-preview.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap">
+    <link rel="stylesheet" href="css/style.css?v=1.7.0">
+    <script>
+        (function () {
+            var saved = localStorage.getItem('cl-theme') || 'system';
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.documentElement.setAttribute('data-theme-mode', saved);
+        })();
+    </script>
+</head>
+<body class="standalone-module" data-standalone-page="dashboard">
+    <main id="app-content" tabindex="-1">
+        <div id="page-dashboard" class="page active">
+                <section class="cl-illustrated-banner cl-module-visual" aria-label="Apresentação da página">
+                    <div>
+                        <span class="cl-banner-eyebrow">CHECKLOG · INVENTÁRIO</span>
+                        <h2>Indicadores que ajudam a decidir</h2>
+                        <p>Use a visão consolidada para identificar tendências, riscos e prioridades do estoque.</p>
+                    </div>
+                    <img src="img/illustrations/estoque.svg" alt="" loading="lazy" width="200" height="145">
+                </section>
+                <section class="work-page-header inventory-header">
+                    <span class="section-kicker">Inventário operacional</span>
+                    <h1>Dashboard de Estoque</h1>
+                    <p>Indicadores consolidados para acompanhar volume, categorias e pontos de atenção.</p>
+                    <div class="inventory-tabs">
+                        <a href="javascript:void(0)" data-page="controle-estoque" onclick="navigate('controle-estoque')">Produtos</a>
+                        <a href="javascript:void(0)" data-page="dashboard" onclick="navigate('dashboard')" class="active">Dashboard</a>
+                        <a href="javascript:void(0)" data-page="relatorios" onclick="navigate('relatorios')">Relatórios</a>
+                        <a href="javascript:void(0)" data-page="encomendar" onclick="navigate('encomendar')">Encomendar</a>
+                    </div>
+                </section>
+                <div class="cl-dashboard-v2" aria-label="Painel de indicadores do estoque">
+                    <div class="cl-dash-intro"><div><span class="section-kicker">Visão em tempo real</span><h2>Panorama do inventário</h2><p>Indicadores calculados a partir dos seus registros no CheckLog.</p></div><button type="button" class="cl-dash-action" onclick="navigate('controle-estoque')">Ver produtos <span aria-hidden="true">↗</span></button></div>
+                    <section class="cl-dash-metrics" aria-label="Indicadores principais">
+                        <article class="cl-dash-metric"><div class="cl-dash-metric-top"><span class="cl-dash-icon green" aria-hidden="true">▣</span><span class="cl-dash-tag">Inventário</span></div><span>Total de produtos</span><strong id="dash-total-produtos">0</strong><small>Produtos cadastrados</small></article>
+                        <article class="cl-dash-metric"><div class="cl-dash-metric-top"><span class="cl-dash-icon blue" aria-hidden="true">▥</span><span class="cl-dash-tag">Unidades</span></div><span>Quantidade disponível</span><strong id="dash-quantidade-highlight">0</strong><small>Somatório do estoque atual</small></article>
+                        <article class="cl-dash-metric"><div class="cl-dash-metric-top"><span class="cl-dash-icon orange" aria-hidden="true">!</span><span class="cl-dash-tag">Atenção</span></div><span>Estoque baixo</span><strong id="dash-estoque-baixo">0</strong><small>Itens no mínimo ou abaixo</small></article>
+                        <article class="cl-dash-metric"><div class="cl-dash-metric-top"><span class="cl-dash-icon purple" aria-hidden="true">◈</span><span class="cl-dash-tag">Categorias</span></div><span>Categorias ativas</span><strong id="dash-categorias">0</strong><small>Grupos com produtos</small></article>
+                    </section>
+                    <div class="cl-dash-charts">
+                        <section class="cl-dash-panel"><div class="cl-dash-panel-heading"><div><h3>Quantidade por categoria</h3><p>Distribuição das unidades atualmente cadastradas</p></div><span class="cl-dash-pill">Dados reais</span></div><div id="dash-category-bars" class="cl-dash-bars" aria-live="polite"><p class="cl-dash-empty">Carregando estoque…</p></div></section>
+                        <section class="cl-dash-panel"><div class="cl-dash-panel-heading"><div><h3>Situação do estoque</h3><p>Produtos disponíveis e que precisam de atenção</p></div></div><div class="cl-dash-donut-wrap"><div id="dash-status-donut" class="cl-dash-donut" role="img" aria-label="Situação do estoque"><div><strong id="dash-donut-total">0</strong><small>produtos</small></div></div><div id="dash-status-legend" class="cl-dash-legend"></div></div></section>
+                    </div>
+                    <div class="cl-dash-bottom">
+                        <section class="cl-dash-panel"><div class="cl-dash-panel-heading"><div><h3>Alerta de estoque baixo</h3><p>Produtos que precisam de reposição</p></div><button class="cl-dash-text-link" type="button" onclick="navigate('controle-estoque')">Ver produtos →</button></div><div class="cl-dash-table-wrap"><table class="cl-dash-table"><thead><tr><th>Produto</th><th>Quantidade</th><th>Mínimo</th><th>Status</th></tr></thead><tbody id="dash-low-stock-body"><tr><td colspan="4">Carregando…</td></tr></tbody></table></div></section>
+                        <section class="cl-dash-panel"><div class="cl-dash-panel-heading"><div><h3>Últimas movimentações</h3><p>Atividade recente registrada no sistema</p></div><button class="cl-dash-text-link" type="button" onclick="navigate('relatorios')">Ver relatórios →</button></div><div class="cl-dash-table-wrap"><table class="cl-dash-table"><thead><tr><th>Produto</th><th>Tipo</th><th>Data</th></tr></thead><tbody id="dash-recent-body"><tr><td colspan="3">Carregando…</td></tr></tbody></table></div></section>
+                    </div>
+                    <section class="cl-dash-financial" aria-label="Resumo financeiro estimado"><div><span>Valor em estoque</span><strong id="dash-valor-row">R$ 0,00</strong></div><div><span>Faturamento potencial</span><strong id="dash-revenue">R$ 0,00</strong></div><div><span>Margem potencial</span><strong id="dash-margin">R$ 0,00</strong></div><p>Estimativas com base nos preços cadastrados, não representam vendas realizadas.</p></section>
+                    <div class="sr-only" aria-hidden="true"><span id="dash-total-produtos-row"></span><span id="dash-categorias-row"></span><span id="dash-estoque-baixo-row"></span><span id="dash-quantidade-row"></span><span id="dash-revenue-row"></span><span id="dash-margin-row"></span></div>
+                </div>
+            </div>
+            </div>
+        
+            
+    </main>
+    <script src="js/email-service.js?v=1.0.1"></script>
+    <script type="module" src="js/app.js?v=1.7.0"></script>
+</body>
+</html>
